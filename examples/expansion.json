@@ -23,17 +23,17 @@
                 ]
             },
             {
-                "action": "if",
+                "action": "expression",
                 "expression": {
                     "type": "greaterThanOrEqual",
                     "left": "counter",
                     "right": 10
                 },
-                "if": [
+                "true": [
                     {"action": "reset", "variable": "counter"},
                     {"action": "goto", "pattern": "level2"}
                 ],
-                "else": [
+                "false": [
                     {"action": "increment", "variable": "counter"}
                 ]
             }
@@ -64,17 +64,17 @@
                 ]
             },
             {
-                "action": "if",
+                "action": "expression",
                 "expression": {
                     "type": "greaterThanOrEqual",
                     "left": "counter",
                     "right": 10
                 },
-                "if": [
+                "true": [
                     {"action": "reset", "variable": "counter"},
                     {"action": "goto", "pattern": "level3"}
                 ],
-                "else": [
+                "false": [
                     {"action": "increment", "variable": "counter"}
                 ]
             }
@@ -113,17 +113,17 @@
                 ]
             },
             {
-                "action": "if",
+                "action": "expression",
                 "expression": {
                     "type": "greaterThanOrEqual",
                     "left": "counter",
                     "right": 10
                 },
-                "if": [
+                "true": [
                     {"action": "reset", "variable": "counter"},
                     {"action": "goto", "pattern": "level4"}
                 ],
-                "else": [
+                "false": [
                     {"action": "increment", "variable": "counter"}
                 ]
             }
@@ -170,17 +170,17 @@
                 ]
             },
             {
-                "action": "if",
+                "action": "expression",
                 "expression": {
                     "type": "greaterThanOrEqual",
                     "left": "counter",
                     "right": 10
                 },
-                "if": [
+                "true": [
                     {"action": "reset", "variable": "counter"},
                     {"action": "goto", "pattern": "level5"}
                 ],
-                "else": [
+                "false": [
                     {"action": "increment", "variable": "counter"}
                 ]
             }
