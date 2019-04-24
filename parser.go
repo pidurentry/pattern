@@ -23,26 +23,26 @@ func (parser *Parser) Load(data io.Reader) (Pattern, error) {
 func (parser *Parser) parse(pattern *Pattern, decoder *json.Decoder) error {
 	var rawPattern map[string]interface{}
 	if err := decoder.Decode(&rawPattern); err != nil {
-		return err
+		return &ParseError{fmt.Sprintf("%s", err)}
 	}
 
 	for name, value := range rawPattern {
 		switch name {
 		case "devices":
 			if err := parser.parseDevices(pattern, value); err != nil {
-				return err
+				return &ParseError{fmt.Sprintf("%s", err)}
 			}
 		case "variables":
 			if err := parser.parseVariables(pattern, value); err != nil {
-				return err
+				return &ParseError{fmt.Sprintf("%s", err)}
 			}
 		case "pattern":
 			if err := parser.parsePattern(pattern, value); err != nil {
-				return err
+				return &ParseError{fmt.Sprintf("%s", err)}
 			}
 		case "patterns":
 			if err := parser.parsePatterns(pattern, value); err != nil {
-				return err
+				return &ParseError{fmt.Sprintf("%s", err)}
 			}
 		default:
 			return &ParseError{fmt.Sprintf("unknown modifier: %s", name)}
