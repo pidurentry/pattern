@@ -1,11 +1,9 @@
-package pattern
+package tools
 
 import "sync/atomic"
 
-func LoadValue(variables Variables, value interface{}) uint64 {
+func Value(value interface{}) uint64 {
 	switch value := value.(type) {
-	case string:
-		return atomic.LoadUint64(variables.Fetch(value))
 	case uint64:
 		return value
 	case uint32:
@@ -20,5 +18,14 @@ func LoadValue(variables Variables, value interface{}) uint64 {
 		return uint64(value)
 	default:
 		return 0
+	}
+}
+
+func LoadValue(variables Variables, value interface{}) uint64 {
+	switch value := value.(type) {
+	case string:
+		return atomic.LoadUint64(variables.Fetch(value))
+	default:
+		return Value(value)
 	}
 }
