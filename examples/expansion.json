@@ -1,0 +1,239 @@
+{
+    "devices": ["FleshlightLaunch", "Linear"],
+    "variables": {
+        "counter": 0
+    },
+    "pattern": "level1",
+    "patterns": {
+        "level1": [
+            {
+                "action": "repeat",
+                "count": 5,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 10},
+                    {"action": "move", "value": 99, "speed": 10}
+                ]
+            },
+            {
+                "action": "repeat",
+                "count": 1,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 20},
+                    {"action": "move", "value": 99, "speed": 20}
+                ]
+            },
+            {
+                "action": "if",
+                "expression": {
+                    "type": "greaterThanOrEqual",
+                    "left": "counter",
+                    "right": 10
+                },
+                "if": [
+                    {"action": "reset", "variable": "counter"},
+                    {"action": "goto", "pattern": "level2"}
+                ],
+                "else": [
+                    {"action": "increment", "variable": "counter"}
+                ]
+            }
+        ],
+        "level2": [
+            {
+                "action": "repeat",
+                "count": 10,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 10},
+                    {"action": "move", "value": 99, "speed": 10}
+                ]
+            },
+            {
+                "action": "repeat",
+                "count": 2,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 20},
+                    {"action": "move", "value": 99, "speed": 20}
+                ]
+            },
+            {
+                "action": "repeat",
+                "count": 1,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 30},
+                    {"action": "move", "value": 99, "speed": 30}
+                ]
+            },
+            {
+                "action": "if",
+                "expression": {
+                    "type": "greaterThanOrEqual",
+                    "left": "counter",
+                    "right": 10
+                },
+                "if": [
+                    {"action": "reset", "variable": "counter"},
+                    {"action": "goto", "pattern": "level3"}
+                ],
+                "else": [
+                    {"action": "increment", "variable": "counter"}
+                ]
+            }
+        ],
+        "level3": [
+            {
+                "action": "repeat",
+                "count": 15,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 10},
+                    {"action": "move", "value": 99, "speed": 10}
+                ]
+            },
+            {
+                "action": "repeat",
+                "count": 5,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 20},
+                    {"action": "move", "value": 99, "speed": 20}
+                ]
+            },
+            {
+                "action": "repeat",
+                "count": 2,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 30},
+                    {"action": "move", "value": 99, "speed": 30}
+                ]
+            },
+            {
+                "action": "repeat",
+                "count": 1,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 40},
+                    {"action": "move", "value": 99, "speed": 40}
+                ]
+            },
+            {
+                "action": "if",
+                "expression": {
+                    "type": "greaterThanOrEqual",
+                    "left": "counter",
+                    "right": 10
+                },
+                "if": [
+                    {"action": "reset", "variable": "counter"},
+                    {"action": "goto", "pattern": "level4"}
+                ],
+                "else": [
+                    {"action": "increment", "variable": "counter"}
+                ]
+            }
+        ],
+        "level4": [
+            {
+                "action": "repeat",
+                "count": 20,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 10},
+                    {"action": "move", "value": 99, "speed": 10}
+                ]
+            },
+            {
+                "action": "repeat",
+                "count": 10,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 20},
+                    {"action": "move", "value": 99, "speed": 20}
+                ]
+            },
+            {
+                "action": "repeat",
+                "count": 5,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 30},
+                    {"action": "move", "value": 99, "speed": 30}
+                ]
+            },
+            {
+                "action": "repeat",
+                "count": 2,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 40},
+                    {"action": "move", "value": 99, "speed": 40}
+                ]
+            },
+            {
+                "action": "repeat",
+                "count": 1,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 50},
+                    {"action": "move", "value": 99, "speed": 50}
+                ]
+            },
+            {
+                "action": "if",
+                "expression": {
+                    "type": "greaterThanOrEqual",
+                    "left": "counter",
+                    "right": 10
+                },
+                "if": [
+                    {"action": "reset", "variable": "counter"},
+                    {"action": "goto", "pattern": "level5"}
+                ],
+                "else": [
+                    {"action": "increment", "variable": "counter"}
+                ]
+            }
+        ],
+        "level5": [
+            {
+                "action": "repeat",
+                "count": 25,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 10},
+                    {"action": "move", "value": 99, "speed": 10}
+                ]
+            },
+            {
+                "action": "repeat",
+                "count": 15,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 20},
+                    {"action": "move", "value": 99, "speed": 20}
+                ]
+            },
+            {
+                "action": "repeat",
+                "count": 10,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 30},
+                    {"action": "move", "value": 99, "speed": 30}
+                ]
+            },
+            {
+                "action": "repeat",
+                "count": 5,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 40},
+                    {"action": "move", "value": 99, "speed": 40}
+                ]
+            },
+            {
+                "action": "repeat",
+                "count": 2,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 50},
+                    {"action": "move", "value": 99, "speed": 50}
+                ]
+            },
+            {
+                "action": "repeat",
+                "count": 1,
+                "pattern": [
+                    {"action": "move", "value": 0, "speed": 60},
+                    {"action": "move", "value": 99, "speed": 60}
+                ]
+            }
+        ]
+    }
+}
