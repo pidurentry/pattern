@@ -5,6 +5,7 @@ import "sync/atomic"
 type Variables interface {
 	Initialise(string, uint64)
 	Fetch(string) *uint64
+	FetchAll() map[string]*uint64
 	Reset(string) *uint64
 }
 
@@ -37,6 +38,10 @@ func (variables *variables) Fetch(variable string) *uint64 {
 		return variables.Reset(variable)
 	}
 	return value
+}
+
+func (variables *variables) FetchAll() map[string]*uint64 {
+	return variables.current
 }
 
 func (variables *variables) Reset(variable string) *uint64 {
