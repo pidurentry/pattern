@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	tools.ActionFactory["move"] = func(action map[string]interface{}) (interface{}, error) {
+	tools.ActionFactory["move"] = func(action map[string]interface{}) (tools.Action, error) {
 		move := &Move{}
 		for name, value := range action {
 			switch name {
@@ -26,4 +26,11 @@ func init() {
 type Move struct {
 	Value interface{} `json:"value"`
 	Speed interface{} `json:"speed"`
+}
+
+func (action *Move) Apply(player tools.Player, variables tools.Variables, device tools.Device) error {
+	return device.Move(
+		tools.LoadValue(variables, action.Value),
+		tools.LoadValue(variables, action.Speed),
+	)
 }

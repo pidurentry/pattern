@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	tools.ActionFactory["repeat"] = func(action map[string]interface{}) (interface{}, error) {
+	tools.ActionFactory["repeat"] = func(action map[string]interface{}) (tools.Action, error) {
 		repeat := &Repeat{}
 		for name, value := range action {
 			switch name {
@@ -34,6 +34,16 @@ func init() {
 }
 
 type Repeat struct {
-	Count   interface{}   `json:"count"`
-	Pattern []interface{} `json:"pattern"`
+	Count   interface{}    `json:"count"`
+	Pattern []tools.Action `json:"pattern"`
+}
+
+func (action *Repeat) Apply(player tools.Player, variables tools.Variables, device tools.Device) error {
+	count := tools.LoadValue(variables, action.Count)
+	for i := uint64(0); i < count; i++ {
+		if err := player.QueueActions(action.Pattern); err != nil {
+			return err
+		}
+	}
+	return nil
 }

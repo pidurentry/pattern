@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	tools.ActionFactory["goto"] = func(action map[string]interface{}) (interface{}, error) {
+	tools.ActionFactory["goto"] = func(action map[string]interface{}) (tools.Action, error) {
 		_goto := &Goto{}
 		for name, value := range action {
 			switch name {
@@ -27,4 +27,8 @@ func init() {
 
 type Goto struct {
 	Pattern string `json:"pattern"`
+}
+
+func (action *Goto) Apply(player tools.Player, variables tools.Variables, device tools.Device) error {
+	return player.Goto(action.Pattern)
 }

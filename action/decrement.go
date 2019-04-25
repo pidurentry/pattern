@@ -4,10 +4,11 @@ import (
 	"errors"
 	"fmt"
 	"github.com/pidurentry/pattern/tools"
+	"sync/atomic"
 )
 
 func init() {
-	tools.ActionFactory["decrement"] = func(action map[string]interface{}) (interface{}, error) {
+	tools.ActionFactory["decrement"] = func(action map[string]interface{}) (tools.Action, error) {
 		decrement := &Decrement{Value: 1}
 		for name, value := range action {
 			switch name {
@@ -30,4 +31,10 @@ func init() {
 type Decrement struct {
 	Variable string      `json:"variable"`
 	Value    interface{} `json:"value"`
+}
+
+func (action *Decrement) Apply(player tools.Player, variables tools.Variables, device tools.Device) error {
+	variable := variables.Fetch(action.Variable)
+	atomic.AddUint64(variable, 0-tools.LoadValue(variables, action.Value))
+	return nil
 }

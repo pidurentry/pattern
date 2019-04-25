@@ -8,7 +8,7 @@ import (
 )
 
 func init() {
-	tools.ActionFactory["sleep"] = func(action map[string]interface{}) (interface{}, error) {
+	tools.ActionFactory["sleep"] = func(action map[string]interface{}) (tools.Action, error) {
 		sleep := &Sleep{Unit: time.Millisecond}
 		for name, value := range action {
 			switch name {
@@ -37,4 +37,10 @@ func init() {
 type Sleep struct {
 	Time interface{}   `json:"time"`
 	Unit time.Duration `json:"unit"`
+}
+
+func (action *Sleep) Apply(player tools.Player, variables tools.Variables, device tools.Device) error {
+	return player.Sleep(
+		time.Duration(tools.LoadValue(variables, action.Time)) * action.Unit,
+	)
 }

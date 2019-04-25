@@ -15,7 +15,7 @@ type Parser struct{}
 func (parser *Parser) Load(data io.Reader) (Pattern, error) {
 	pattern := Pattern{
 		Variables: tools.NewVariables(map[string]uint64{}),
-		Patterns:  make(map[string][]interface{}),
+		Patterns:  make(map[string][]tools.Action),
 	}
 	return pattern, parser.parse(&pattern, json.NewDecoder(data))
 }
@@ -109,7 +109,7 @@ func (parser *Parser) parsePatterns(pattern *Pattern, rawPatterns interface{}) e
 	return nil
 }
 
-func (parser *Parser) parseActions(rawActions interface{}) ([]interface{}, error) {
+func (parser *Parser) parseActions(rawActions interface{}) ([]tools.Action, error) {
 	actions, ok := rawActions.([]interface{})
 	if !ok {
 		return nil, &ParseError{fmt.Sprintf("actions should be an array maps: %T", rawActions)}

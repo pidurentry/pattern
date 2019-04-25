@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	tools.ActionFactory["expression"] = func(action map[string]interface{}) (interface{}, error) {
+	tools.ActionFactory["expression"] = func(action map[string]interface{}) (tools.Action, error) {
 		expression := &Expression{}
 		for name, value := range action {
 			switch name {
@@ -57,6 +57,14 @@ func init() {
 
 type Expression struct {
 	Expression tools.Expression `json:"expression"`
-	True       []interface{}    `json:"true"`
-	False      []interface{}    `json:"false"`
+	True       []tools.Action   `json:"true"`
+	False      []tools.Action   `json:"false"`
+}
+
+func (action *Expression) Apply(player tools.Player, variables tools.Variables, device tools.Device) error {
+	if action.Expression.Test(variables) {
+		return player.QueueActions(action.True)
+	} else {
+		return player.QueueActions(action.False)
+	}
 }

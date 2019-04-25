@@ -5,12 +5,12 @@ import (
 	"fmt"
 )
 
-type actionFactory func(map[string]interface{}) (interface{}, error)
+type actionFactory func(map[string]interface{}) (Action, error)
 
 var ActionFactory = make(map[string]actionFactory)
 
-func NewActions(rawActions []interface{}) ([]interface{}, error) {
-	actions := make([]interface{}, len(rawActions))
+func NewActions(rawActions []interface{}) ([]Action, error) {
+	actions := make([]Action, len(rawActions))
 	for index, rawAction := range rawActions {
 		actionMap, ok := rawAction.(map[string]interface{})
 		if !ok {
@@ -27,7 +27,7 @@ func NewActions(rawActions []interface{}) ([]interface{}, error) {
 	return actions, nil
 }
 
-func NewAction(actionMap map[string]interface{}) (interface{}, error) {
+func NewAction(actionMap map[string]interface{}) (Action, error) {
 	actionType, ok := actionMap["action"].(string)
 	if !ok {
 		return nil, errors.New("action type should be a string")

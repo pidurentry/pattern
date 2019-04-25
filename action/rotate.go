@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	tools.ActionFactory["rotate"] = func(action map[string]interface{}) (interface{}, error) {
+	tools.ActionFactory["rotate"] = func(action map[string]interface{}) (tools.Action, error) {
 		rotate := &Rotate{}
 		for name, value := range action {
 			switch name {
@@ -26,4 +26,16 @@ func init() {
 type Rotate struct {
 	Speed     interface{} `json:"speed"`
 	Clockwise interface{} `json:"clockwise"`
+}
+
+func (action *Rotate) Apply(player tools.Player, variables tools.Variables, device tools.Device) error {
+	clockwise := false
+	if tools.LoadValue(variables, action.Speed) > 0 {
+		clockwise = true
+	}
+
+	return device.Rotate(
+		tools.LoadValue(variables, action.Speed),
+		clockwise,
+	)
 }

@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	tools.ActionFactory["reset"] = func(action map[string]interface{}) (interface{}, error) {
+	tools.ActionFactory["reset"] = func(action map[string]interface{}) (tools.Action, error) {
 		reset := &Reset{}
 		for name, value := range action {
 			switch name {
@@ -27,4 +27,9 @@ func init() {
 
 type Reset struct {
 	Variable string `json:"variable"`
+}
+
+func (action *Reset) Apply(player tools.Player, variables tools.Variables, device tools.Device) error {
+	variables.Reset(action.Variable)
+	return nil
 }

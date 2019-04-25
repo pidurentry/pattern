@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	tools.ActionFactory["vibrate"] = func(action map[string]interface{}) (interface{}, error) {
+	tools.ActionFactory["vibrate"] = func(action map[string]interface{}) (tools.Action, error) {
 		vibrate := &Vibrate{}
 		for name, value := range action {
 			switch name {
@@ -23,4 +23,10 @@ func init() {
 
 type Vibrate struct {
 	Speed interface{} `json:"speed"`
+}
+
+func (action *Vibrate) Apply(player tools.Player, variables tools.Variables, device tools.Device) error {
+	return device.Vibrate(
+		tools.LoadValue(variables, action.Speed),
+	)
 }
