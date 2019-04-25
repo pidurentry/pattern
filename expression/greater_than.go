@@ -1,7 +1,6 @@
 package expression
 
 import (
-	"errors"
 	"fmt"
 	"github.com/pidurentry/pattern/tools"
 )
@@ -16,7 +15,7 @@ func init() {
 			case "right":
 				greaterThan.Right = value
 			default:
-				return nil, errors.New(fmt.Sprintf("unknown key for 'greaterThan' expression: %s", name))
+				return nil, fmt.Errorf("unknown key for 'greaterThan' expression: %s", name)
 			}
 		}
 		return greaterThan, nil

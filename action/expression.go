@@ -26,7 +26,7 @@ func init() {
 			case "true":
 				rawActions, ok := value.([]interface{})
 				if !ok {
-					return nil, errors.New(fmt.Sprintf("'expression' action expects array of actions for 'true': %T", value))
+					return nil, fmt.Errorf("'expression' action expects array of actions for 'true': %T", value)
 				}
 
 				actions, err := tools.NewActions(rawActions)
@@ -38,7 +38,7 @@ func init() {
 			case "false":
 				rawActions, ok := value.([]interface{})
 				if !ok {
-					return nil, errors.New(fmt.Sprintf("'expression' action expects array of actions for 'false': %T", value))
+					return nil, fmt.Errorf("'expression' action expects array of actions for 'false': %T", value)
 				}
 
 				actions, err := tools.NewActions(rawActions)
@@ -48,7 +48,7 @@ func init() {
 
 				expression.False = actions
 			default:
-				return nil, errors.New(fmt.Sprintf("unknown key for 'expression' action: %s", name))
+				return nil, fmt.Errorf("unknown key for 'expression' action: %s", name)
 			}
 		}
 		return expression, nil

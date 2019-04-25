@@ -1,7 +1,6 @@
 package action
 
 import (
-	"errors"
 	"fmt"
 	"github.com/pidurentry/pattern/tools"
 )
@@ -16,7 +15,7 @@ func init() {
 			case "speed":
 				move.Speed = value
 			default:
-				return nil, errors.New(fmt.Sprintf("unknown key for 'move' action: %s", name))
+				return nil, fmt.Errorf("unknown key for 'move' action: %s", name)
 			}
 		}
 		return move, nil

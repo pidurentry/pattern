@@ -18,7 +18,7 @@ func NewExpression(expressionMap map[string]interface{}) (Expression, error) {
 
 	factory, ok := ExpressionFactory[expressionType]
 	if !ok {
-		return nil, errors.New(fmt.Sprintf("unknown expression: %s", expressionType))
+		return nil, fmt.Errorf("unknown expression: %s", expressionType)
 	}
 
 	return factory(expressionMap)

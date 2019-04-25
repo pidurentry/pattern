@@ -1,7 +1,6 @@
 package action
 
 import (
-	"errors"
 	"fmt"
 	"github.com/pidurentry/pattern/tools"
 )
@@ -16,7 +15,7 @@ func init() {
 			case "clockwise":
 				rotate.Clockwise = value
 			default:
-				return nil, errors.New(fmt.Sprintf("unknown key for 'rotate' action: %s", name))
+				return nil, fmt.Errorf("unknown key for 'rotate' action: %s", name)
 			}
 		}
 		return rotate, nil

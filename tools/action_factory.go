@@ -36,7 +36,7 @@ func NewAction(actionMap map[string]interface{}) (Action, error) {
 
 	factory, ok := ActionFactory[actionType]
 	if !ok {
-		return nil, errors.New(fmt.Sprintf("unknown action: %s", actionType))
+		return nil, fmt.Errorf("unknown action: %s", actionType)
 	}
 
 	return factory(actionMap)

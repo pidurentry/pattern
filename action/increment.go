@@ -1,7 +1,6 @@
 package action
 
 import (
-	"errors"
 	"fmt"
 	"github.com/pidurentry/pattern/tools"
 	"sync/atomic"
@@ -15,13 +14,13 @@ func init() {
 			case "variable":
 				variable, ok := value.(string)
 				if !ok {
-					return nil, errors.New(fmt.Sprintf("'increment' action expects string for 'variable': %T", value))
+					return nil, fmt.Errorf("'increment' action expects string for 'variable': %T", value)
 				}
 				increment.Variable = variable
 			case "value":
 				increment.Value = value
 			default:
-				return nil, errors.New(fmt.Sprintf("unknown key for 'increment' action: %s", name))
+				return nil, fmt.Errorf("unknown key for 'increment' action: %s", name)
 			}
 		}
 		return increment, nil

@@ -1,7 +1,6 @@
 package action
 
 import (
-	"errors"
 	"fmt"
 	"github.com/pidurentry/pattern/tools"
 )
@@ -14,11 +13,11 @@ func init() {
 			case "variable":
 				variable, ok := value.(string)
 				if !ok {
-					return nil, errors.New(fmt.Sprintf("'reset' action expects string for 'variable': %T", value))
+					return nil, fmt.Errorf("'reset' action expects string for 'variable': %T", value)
 				}
 				reset.Variable = variable
 			default:
-				return nil, errors.New(fmt.Sprintf("unknown key for 'reset' action: %s", name))
+				return nil, fmt.Errorf("unknown key for 'reset' action: %s", name)
 			}
 		}
 		return reset, nil

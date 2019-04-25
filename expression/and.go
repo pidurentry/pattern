@@ -1,7 +1,6 @@
 package expression
 
 import (
-	"errors"
 	"fmt"
 	"github.com/pidurentry/pattern/tools"
 )
@@ -14,14 +13,14 @@ func init() {
 			case "expressions":
 				rawExpressions, ok := value.([]interface{})
 				if !ok {
-					return nil, errors.New(fmt.Sprintf("'and' expression expects array of objects for 'expressions': %T", value))
+					return nil, fmt.Errorf("'and' expression expects array of objects for 'expressions': %T", value)
 				}
 
 				expressions := make([]tools.Expression, len(rawExpressions))
 				for index, rawExpression := range rawExpressions {
 					expressionMap, ok := rawExpression.(map[string]interface{})
 					if !ok {
-						return nil, errors.New(fmt.Sprintf("'and' expression expects array of objects for 'expressions': %T", value))
+						return nil, fmt.Errorf("'and' expression expects array of objects for 'expressions': %T", value)
 					}
 
 					_expression, err := tools.NewExpression(expressionMap)
@@ -34,7 +33,7 @@ func init() {
 
 				_and.Expressions = expressions
 			default:
-				return nil, errors.New(fmt.Sprintf("unknown key for 'and' expression: %s", name))
+				return nil, fmt.Errorf("unknown key for 'and' expression: %s", name)
 			}
 		}
 		return _and, nil

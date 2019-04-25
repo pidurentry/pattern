@@ -1,7 +1,6 @@
 package action
 
 import (
-	"errors"
 	"fmt"
 	"github.com/pidurentry/pattern/tools"
 )
@@ -14,7 +13,7 @@ func init() {
 			case "speed":
 				vibrate.Speed = value
 			default:
-				return nil, errors.New(fmt.Sprintf("unknown key for 'vibrate' action: %s", name))
+				return nil, fmt.Errorf("unknown key for 'vibrate' action: %s", name)
 			}
 		}
 		return vibrate, nil

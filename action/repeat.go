@@ -1,7 +1,6 @@
 package action
 
 import (
-	"errors"
 	"fmt"
 	"github.com/pidurentry/pattern/tools"
 )
@@ -16,7 +15,7 @@ func init() {
 			case "pattern":
 				rawActions, ok := value.([]interface{})
 				if !ok {
-					return nil, errors.New(fmt.Sprintf("'repeat' action expects array of actions for 'pattern': %T", value))
+					return nil, fmt.Errorf("'repeat' action expects array of actions for 'pattern': %T", value)
 				}
 
 				actions, err := tools.NewActions(rawActions)
@@ -26,7 +25,7 @@ func init() {
 
 				repeat.Pattern = actions
 			default:
-				return nil, errors.New(fmt.Sprintf("unknown key for 'repeat' action: %s", name))
+				return nil, fmt.Errorf("unknown key for 'repeat' action: %s", name)
 			}
 		}
 		return repeat, nil

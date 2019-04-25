@@ -1,7 +1,6 @@
 package action
 
 import (
-	"errors"
 	"fmt"
 	"github.com/pidurentry/pattern/tools"
 )
@@ -14,11 +13,11 @@ func init() {
 			case "pattern":
 				pattern, ok := value.(string)
 				if !ok {
-					return nil, errors.New(fmt.Sprintf("'goto' action expects string for 'pattern': %T", value))
+					return nil, fmt.Errorf("'goto' action expects string for 'pattern': %T", value)
 				}
 				_goto.Pattern = pattern
 			default:
-				return nil, errors.New(fmt.Sprintf("unknown key for 'goto' action: %s", name))
+				return nil, fmt.Errorf("unknown key for 'goto' action: %s", name)
 			}
 		}
 		return _goto, nil

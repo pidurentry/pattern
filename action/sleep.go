@@ -1,7 +1,6 @@
 package action
 
 import (
-	"errors"
 	"fmt"
 	"github.com/pidurentry/pattern/tools"
 	"time"
@@ -17,7 +16,7 @@ func init() {
 			case "unit":
 				unit, ok := value.(string)
 				if !ok {
-					return nil, errors.New(fmt.Sprintf("'sleep' action expects string for 'unit': %T", value))
+					return nil, fmt.Errorf("'sleep' action expects string for 'unit': %T", value)
 				}
 
 				duration, err := time.ParseDuration(fmt.Sprintf("1%s", unit))
@@ -27,7 +26,7 @@ func init() {
 
 				sleep.Unit = duration
 			default:
-				return nil, errors.New(fmt.Sprintf("unknown key for 'sleep' action: %s", name))
+				return nil, fmt.Errorf("unknown key for 'sleep' action: %s", name)
 			}
 		}
 		return sleep, nil
